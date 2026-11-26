@@ -329,7 +329,8 @@ export function withoutBase(input: string, base: string) {
     return input;
   }
   const trimmed = input.slice(_base.length);
-  return trimmed[0] === "/" ? trimmed : "/" + trimmed;
+  const normalized = trimmed.replace(/\/\/+/g, '/');
+  return normalized[0] === "/" ? normalized : "/" + normalized;
 }
 
 /**
