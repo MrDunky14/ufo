@@ -329,7 +329,11 @@ export function withoutBase(input: string, base: string) {
     return input;
   }
   const trimmed = input.slice(_base.length);
-  return trimmed[0] === "/" ? trimmed : "/" + trimmed;
+  if (trimmed === "") {
+    return "/";
+  }
+  const normalized = trimmed.replace(/\/\/+/g, "/");
+  return normalized.startsWith("/") ? normalized : "/" + normalized;
 }
 
 /**
